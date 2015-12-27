@@ -1,10 +1,15 @@
 Package: yscs
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Collection of tools used in York University's Statistical Consulting Servive
 Version: 0.1
 Date: 2015-12-25
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Georges Monette, John Fox, Michael Friendly, Heather Krause
+Maintainer: Georges Monette <georges+yscs@yorku.ca>
+Description: Collection of utility functions for linear and mixed models including
+   wald:  Wald test with functions to generate hypothesis matrices
+   gsp:   general spline with any degree and smoothness with additional
+          function 'sc' to contruct linear hypotheses,
+   capply: create contextual variables. Also: cvar, dvar, up, xapply
+   Misc:  vif.lme, xqplot, tab, panel.subgroups (additional level of subgroups in xyplot), multresp
+License: GPL (>= 2)
 LazyData: TRUE

@@ -1,0 +1,9 @@
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+yscs
+====
+
+yscs is a collection of tools used in the Statistical Consulting Service at York University. It is a consolidation of tools developed in the 'spida' (Summer Programe in Data Analysis 2000-2012) package and other smaller packages.
+
+As more tools are ported to 'yscs', its functionality will expand. Currently, it contains the following components:
+
+-   wald and related functions: the quick and meaningful exploration of questions involving the linear coefficients of linear models is accomplished efficiently using the 'general linear hypothesis'. See the help page for the 'wald' function.

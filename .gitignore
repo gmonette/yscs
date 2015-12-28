@@ -3,13 +3,13 @@
 .RData
 # History files
 .Rapp.history
-
 # Example code in package build process
 *-Ex.R
-
 # RStudio files
 .Rproj.user/
-
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
+4e3463c2-e612-48ed-a6c0-04ea74b0bbf9
+51528f6f-85ad-43ac-b4b8-669961ef3d92
+90450cea-f51a-42c4-8296-bd57754af8d4

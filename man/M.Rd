@@ -41,7 +41,7 @@ M(x, ...)
 \item{keep.intercept}{(default: FALSE) if TRUE generate a column for the intercept term}
 }
 \description{
-Interprets formulas to generate hypothesis matrices
+Interprets a formula to generate the corresponding portion of a hypothesis matrix. See examples in \code{\link{Lfx}}. Creates an 'M' object with methods to generate coefficients to estimate interaction terms and comparisons of factor levels.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -63,4 +63,7 @@ Interprets formulas to generate hypothesis matrices
 
 \item \code{factor}: '>=' method for factors
 }}
+\seealso{
+\code{\link{Lfx}}
+}
 

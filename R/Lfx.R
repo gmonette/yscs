@@ -49,7 +49,7 @@
 #'  \item{interaction terms: \code{M(x) * M(fac0)}}
 #'  \item{zero block of the correct size: \code{0 * M(fac)}}
 #' }
-#' @aliases Lfx M M.default M.factor M.formula M.M <.factor >.factor <=.factor
+#' @seealso Lfx M M.default M.factor M.formula M.M <.factor >.factor <=.factor
 #' =>.factor
 #' @param fit a fitted model with a 'getFix' method.
 #' @param expr.list a list of expressions with one component for each column
@@ -203,11 +203,12 @@ Lfx <-
 
 #' Method to generate hypothesis matrices from formulas
 #'
-#' Interprets formulas to generate hypothesis matrices
+#' Interprets a formula to generate the corresponding portion of a hypothesis matrix. See examples in \code{\link{Lfx}}. Creates an 'M' object with methods to generate coefficients to estimate interaction terms and comparisons of factor levels.
 #'
 #' @param form formula
 #' @param ... other arguments
 #' @param keep.intercept (default: FALSE) if TRUE generate a column for the intercept term
+#' @seealso \code{\link{Lfx}}
 #' @export
 M <- function(x,...) UseMethod("M")
 

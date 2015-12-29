@@ -1,13 +1,15 @@
 #' Round and format
 #'
-#' Round to a given number of significant digits for variability
+#' Round to a given number of significant digits to show variability in a vector of numbers.
 #'
 #' Instead of rounding to a given number of significant digits, or rounding
 #' to a given significance, 'rnd' rounds so that the variability in a set of
-#' number is exhibited to a given number of digits.
+#' number is exhibited to a given number of digits. For example, 100.1233, 100.2345, 100.3456,
+#' rounded to 3 significant digits would be 100., 100., 100., but rounded to 3 significant
+#' digits for variability is 100.123, 100.234, 100.345.
 #'
 #' @param x an object to be rounded and formatted
-#' @param digits number of digits for rounding
+#' @param digits significant digits for variation in x
 #' @param ... passed on to \code{\link{format}} function
 #' @seealso \code{\link{pfmt}}, \code{\link{rpfmt}}
 #' @examples
@@ -19,9 +21,8 @@
 #' rnd(123.45678901)
 #' @export
 rnd <- function(x, digits, ...) UseMethod('rnd')
-#' @rdname rnd for numeric input
+#' @describeIn rnd default method
 #' @export
-#' @param digits (default=3) significant digits for variation in x
 rnd.default <- function(x, digits = 3, ..., verbose = 0) {
   if (is.numeric(x)){
     ran <- diff(range(x, na.rm = T))

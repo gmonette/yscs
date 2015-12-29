@@ -2,25 +2,36 @@
 % Please edit documentation in R/rnd.R
 \name{rnd}
 \alias{rnd}
+\alias{rnd.default}
 \title{Round and format}
 \usage{
 rnd(x, digits, ...)
+
+\method{rnd}{default}(x, digits = 3, ..., verbose = 0)
 }
 \arguments{
 \item{x}{an object to be rounded and formatted}
 
-\item{digits}{number of digits for rounding}
+\item{digits}{significant digits for variation in x}
 
 \item{...}{passed on to \code{\link{format}} function}
+
+\item{digits}{(default = 3)}
 }
 \description{
-Round to a given number of significant digits for variability
+Round to a given number of significant digits to show variability in a vector of numbers.
 }
 \details{
 Instead of rounding to a given number of significant digits, or rounding
 to a given significance, 'rnd' rounds so that the variability in a set of
-number is exhibited to a given number of digits.
+number is exhibited to a given number of digits. For example, 100.1233, 100.2345, 100.3456,
+rounded to 3 significant digits would be 100., 100., 100., but rounded to 3 significant
+digits for variability is 100.123, 100.234, 100.345.
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{default}: default method
+}}
 \examples{
 rnd(c(0.00001111111,0.000022222,0.000015), scientific = F)
 rnd(c(0.00001111111,0.000022222,0.000015)+100, scientific = F)

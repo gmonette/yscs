@@ -41,7 +41,7 @@ factors.}
 }
 \description{
 Lfx facilitates generating linear hypothesis matrices for complex models by using \code{M}
-objects to easily generate portions of hypothesis matrices for complex models.
+objects to easily generate portions of the hypothesis matrix.
 \code{Lfx(fit)} with no other arguments returns a list that is easy to edit to
 differentiate with respect to numeric variables.
 }
@@ -49,7 +49,8 @@ differentiate with respect to numeric variables.
 Creates an L matrix using expressions evaluated in \code{data} for each
 column or multi-column term of the L matrix. Differentiating with respect
 to numeric variables is easy.  Generating pairwise differences between factor levels
-requires the intermediate step of creating a data frame with crossing factors to be difference with
+requires the intermediate step of creating a data frame (usually with \code{\link{expand.grid}},
+with crossed factors to be differenced with
 differently named versions of themselves.
 
 For example, letting \code{fac} be a factor, \code{fac0}, the same factor
@@ -64,13 +65,13 @@ and \code{x} a numerical variable:
 }
 \examples{
 ##
-## The estimated effect of an additional year of education
+## The increase in income associated with an additional year of education
 ##
 
-data(Prestige)   # from car
+data(Prestige)   # from library(car)
 fit <- lm( income ~ (education+I(education^2)) * type, Prestige)
 summary(fit)
-Lfx(fit)  # geneates expression to cut and paste and differentiate
+Lfx(fit)  # generates expression to cut and paste and differentiate
 
 pred <- expand.grid( education = 3:16, type = levels(Prestige$type))
 
@@ -89,7 +90,7 @@ xyplot( coef ~ education , zw, groups = type, type = 'l', auto.key = T)
 fit2 <- lm( income ~ (education+I(education^2)) * type*women, Prestige)
 pred <- expand.grid( education = 3:16, type = levels(Prestige$type), women=c(0,50,100))
 Lfx(fit2)
-zw <- Lfx(fit2,
+Lhyp <- Lfx(fit2,
     list( 0,   # differentiated wrt education
           1 * 1,
           1 * M(I(education)),
@@ -103,15 +104,15 @@ zw <- Lfx(fit2,
           1 * 1 * M(type) * women,
           2 * M(I(education)) * M(type) * women
     ),pred)
-zw
-zw <- as.data.frame( wald(fit2, zw))
+Lhyp
+Lhyp <- as.data.frame( wald(fit2, zw))
 summary(fit2)
 xyplot( coef ~ education|women , zw, groups = type, type = 'l', auto.key = T,
         ylim = c(-30000,30000))
 
-###
-###  Differencing of factor
-###
+##
+##  Differencing of factor
+##
 
 pred <- expand.grid( education = 3:18, women = c(0,50,100),
                      type = levels(Prestige$type),

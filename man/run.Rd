@@ -8,17 +8,16 @@ run(..., envir = parent.frame(), enclos = if (is.list(envir) ||
   is.pairlist(envir)) parent.frame() else baseenv(), try = TRUE)
 }
 \arguments{
-\item{...}{expressions that can evaluate to character strings to paste. Note that the separator
-for pasting is '' to allow expressions within quotes.}
+\item{...}{expressions that can evaluate to character strings to paste.}
 
 \item{envir}{(default = parent.frame()) see \code{\link{eval}}.}
 
 \item{enclos}{(default same as \code{\link{eval}})}
 
-\item{try}{(default TRUE) enclose the expression in \code{\link{try}}.}
+\item{try}{(default: TRUE) enclose the expression in \code{\link{try}}.}
 }
 \value{
-the result of evaluating \code{paste(...,sep='')} as an expression
+the result of evaluating \code{paste0(...)} as an expression
 }
 \description{
 Evaluate character strings as an expression in the appropriate frame so the function can be
@@ -26,6 +25,6 @@ used in a function and use variables in the environment of the function.
 }
 \examples{
 run('ls()')
-for(nam in c('ls','search')) run(nam,"()")  # very unimaginative example
+for(nam in c('ls','search')) print(run(nam,"()"))  # very unimaginative example
 }
 

@@ -13,22 +13,33 @@ longitudinal and hierarchical data analysis.
 \section{Wald tests and linear hypothesis matrices}{
 
 \itemize{
-\item \code{\link{wald}} quick wald tests building hypothesis matrices from regular expressions
-\item \code{\link{walddf}}
-\item \code{\link{as.data.frame.wald}}
-\item \code{\link{coef.wald}}
-\item \code{\link{print.wald}}
-\item \code{\link{Lfx}}  creates hypothesis matrices for derivatives and differences.
-\item \code{\link{Lall}}
-\item \code{\link{Lc}}
-\item \code{\link{Lcall}}
-\item \code{\link{Ldiff}}
-\item \code{\link{Lequal}}
-\item \code{\link{Lform}}
-\item \code{\link{Lmat}}
-\item \code{\link{Lmu}}
-\item \code{\link{Lrm}}
-\item \code{\link{M}}
+\item \code{\link{wald}} quick Wald tests -- optionally building hypothesis matrices from regular expressions
+\item \code{\link{walddf}} version of wald that returns a data frame
+\item \code{\link{as.data.frame.wald}} return a data frame from a wald object
+\item \code{\link{coef.wald}} method to extract estimated coefficients
+\item \code{\link{print.wald}} printing method
+\item \code{\link{Lfx}}  creates hypothesis matrices for derivatives and differences. Add example for factor differences
+\item \code{\link{M}} constructor for M objects to generate portions of design and hypothesis matrices. Used with  \code{\link{Lfx}}
+\item \code{\link{Lall}} for lmer objects
+\item \code{\link{Lc}} for lmer objects
+\item \code{\link{Lcall}} superseded by Lfx
+\item \code{\link{Ldiff}} superseded by Lfx
+\item \code{\link{Lequal}} superseded by Lfx
+\item \code{\link{Lform}} superseded by Lfx
+\item \code{\link{Lmat}} superseded by Lfx
+\item \code{\link{Lmu}} for lmer objects
+\item \code{\link{Lrm}} superseded by Lfx?
+\item \code{\link{rpfmt}} format estimated values and p-values from a wald test
+}
+}
+
+\section{Utilities for fitted objects}{
+
+\itemize{
+\item \code{\link{getData}} get data frame from a fitted object
+\item \code{\link{getFix}} get fixed effects from a fitted object
+\item \code{\link{getX}} get X matrix from fitted object
+\item \code{\link{gpanel.fit}} plot fitted values and confidence band
 }
 }
 
@@ -52,23 +63,16 @@ longitudinal and hierarchical data analysis.
 \section{Miscellaneous utility functions}{
 
 \itemize{
-\item \code{\link{disp}}
-\item \code{\link{getData}}
-\item \code{\link{getFactorNames}}
-\item \code{\link{getFix}}
-\item \code{\link{getX}}
-\item \code{\link{gpanel.fit}}
-\item \code{\link{grapes-less-grapes}}
-\item \code{\link{labs}}
-\item \code{\link{pch}}
-\item \code{\link{pfmt}}
-\item \code{\link{Pmat}}
+\item \code{\link{disp}} utility to display value of a variable -- useful for debugging
+\item \code{\link{getFactorNames}} get names of variables that are factors in a data frame
+\item \code{\link{\%less\%}} synonym for \code{\link{setdiff}}
+\item \code{\link{labs}} assign, extract and print labels for various objects
+\item \code{\link{pch}} generate plotting character mnemonically
+\item \code{\link{pfmt}} format p-values
 \item \code{\link{print.cat}}
-\item \code{\link{rnd}}
-\item \code{\link{rpfmt}}
-\item \code{\link{run}}
-\item \code{\link{Vcov}}
-\item \code{\link{xlevels}}
+\item \code{\link{rnd}} round a vector to keep significant digits in variation in values
+\item \code{\link{run}} evaluate a string as a command with try
+\item \code{\link{Vcov}} get estimated variance covariance of fixed effects from a fitted object
 }
 }
 

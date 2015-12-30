@@ -15,8 +15,6 @@ rnd(x, digits, ...)
 \item{digits}{significant digits for variation in x}
 
 \item{...}{passed on to \code{\link{format}} function}
-
-\item{digits}{(default = 3)}
 }
 \description{
 Round to a given number of significant digits to show variability in a vector of numbers.

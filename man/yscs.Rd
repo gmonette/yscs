@@ -40,6 +40,7 @@ longitudinal and hierarchical data analysis.
 \item \code{\link{getFix}} get fixed effects from a fitted object
 \item \code{\link{getX}} get X matrix from fitted object
 \item \code{\link{gpanel.fit}} plot fitted values and confidence band
+\item \code{\link{Vcov}} get estimated variance covariance of fixed effects from a fitted object
 }
 }
 
@@ -74,7 +75,7 @@ longitudinal and hierarchical data analysis.
 \item \code{\link{print.cat}}
 \item \code{\link{rnd}} round a vector to keep significant digits in variation in values
 \item \code{\link{run}} evaluate a string as a command with try
-\item \code{\link{Vcov}} get estimated variance covariance of fixed effects from a fitted object
+\item \code{\link{grepv}} grep(..., value = TRUE)
 }
 }
 

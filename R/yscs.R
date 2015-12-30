@@ -44,6 +44,8 @@
 #' }
 #' @section Miscellaneous utility functions:
 #' \itemize{
+#' \item \code{\link{sortdf}} sort rows of a data frame -- useful in a magrittr pipeline
+#' \item \code{\link{assn}} assign -- useful in a magrittr pipeline
 #' \item \code{\link{disp}} utility to display value of a variable -- useful for debugging
 #' \item \code{\link{getFactorNames}} get names of variables that are factors in a data frame
 #' \item \code{\link{\%less\%}} synonym for \code{\link{setdiff}}

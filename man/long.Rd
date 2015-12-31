@@ -2,13 +2,13 @@
 % Please edit documentation in R/long.R
 \name{long}
 \alias{long}
-\alias{to_long}
+\alias{tolong}
 \title{Create a long file from a wide file}
 \usage{
 long(data, sep = "_", timevar = "time", idvar = "id",
   ids = 1:nrow(data), expand = TRUE, safe_sep = "#\%@!", ...)
 
-to_long(data, sep = "_", timevar = "time", idvar = "id",
+tolong(data, sep = "_", timevar = "time", idvar = "id",
   ids = 1:nrow(data), expand = TRUE, safe_sep = "#\%@!", ...)
 }
 \arguments{

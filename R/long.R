@@ -85,7 +85,7 @@ long <- function (data, sep = "_",  timevar = 'time',
 }
 #' @export
 #' @rdname long
-to_long <- long
+tolong <- long
 #  z <- data.frame(id =letters[1:10], id2= 11:20, v_L = 1:10, v_R = 11:20)
 #  long(z)
 #  long(z, timevar = 'Side', idvar = 'idn', ids = LETTERS[1:10])

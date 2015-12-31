@@ -19,12 +19,12 @@ yscs is a collection of tools used in the Statistical Consulting Service at York
 
 You can install the latest version from github with:
 
-    ```R
+    
     if (packageVersion("devtools") < 1.6) {
       install.packages("devtools")
     }
     devtools::install_github("gmonette/yscs")
-    ```
+    
 You may also want to install related packages:   `install.packages(c('car'))`
 As more tools are ported to 'yscs', its functionality will expand. Currently, it contains the following components:
 

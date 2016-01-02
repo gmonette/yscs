@@ -1,11 +1,14 @@
 #' Wide data set from long data set
 #'
-#' Creates a wide data set from a long data set identifying an 'id' variable
-#' and using a time variable whose values provide suffixes for time-varying
-#' variable names in wide form.
+#' Creates a wide data frame from a long data frame identifying
+#' an 'id' variable and using a time variable whose values
+#' provide suffixes for time-varying variable names in wide form.
 #'
-#' In contrast with reshape in stats, this function identifies variables that
-#' are invariant with respect to 'idvar' and does not expand them to wide form.
+#' In contrast with reshape in stats, this function
+#' identifies variables that
+#' are invariant with respect to 'idvar' and does not
+#' expand them to wide form.
+#'
 #' Only 'time'-varying variables are expanded to wide form.
 #'
 #' @param data a data frame in 'long' form.
@@ -34,5 +37,5 @@
 #' @export
 towide <- function(data, idvar = 'id', timevar = 'time', sep = '_') {
   ids  <- names(data)[gicc(data, data[[idvar]])==1]
-  reshape(data, direction = 'wide', idvar = ids, timevar = timevar, sep = sep)
+  stats::reshape(data, direction = 'wide', idvar = ids, timevar = timevar, sep = sep)
 }

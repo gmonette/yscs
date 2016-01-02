@@ -238,6 +238,11 @@ gpanel.labels <-
     }
     panel.text(x, y, labels, ...)
   }
+#' Fill in values
+#'
+#' Fills in values in gaps between observed predictor values to help produce
+#' a smooth graph of predicted values versus predictor values.
+#'
 #' @param data data frame with values of x that need filling in
 #' @param n number of additional points over range of predictor (default 200)
 #' @param form formula idenfying variable x to fill in and grouping variables, g1, g2, etc.

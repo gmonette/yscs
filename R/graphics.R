@@ -21,7 +21,6 @@ NULL
 #'
 #' 'gd' is similar to 'td' except that it uses a theme that resembles that of 'ggplot'
 #'
-#' @aliases td gd
 #' @param n in 'gd' specifies the number of distinct colours to generate to
 #' distinguish groups. 'gd' uses 'latticeExtra' to set defaults for a
 #' ggplot2-like appearance. Default is n = 4
@@ -131,8 +130,7 @@ td <- function(
   ret <- trellis.par.get()
   invisible(ret[grep('superpose',names(ret))])
 }
-
-#' @describeIn td
+#' @describeIn td uses a ggplot-like theme
 #' @param n number of groups for which to set colors, line types, etc. using RColorBrewer.
 #' @examples
 #' #   - setting colors for groups, i.e. 'superpose.symbol' in trellis.par.get():
@@ -288,6 +286,7 @@ gd <-
     ret <- trellis.par.get()
     invisible(ret[grep("superpose", names(ret))])
   }
+#' @describeIn td gd to set non-group parameters
 #' @export
 gd_ <- function(...) gd(superpose = FALSE, ...)
 

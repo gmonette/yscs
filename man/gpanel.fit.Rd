@@ -22,6 +22,8 @@ gpanel.labels(x, y, labels, subscripts, ...)
 fillin(data, form, n = 200, xpd = 1)
 }
 \arguments{
+\item{x,y}{position of labels, usually supplied through panel call}
+
 \item{y}{}
 
 \item{fit}{fitted values of a model, generally passed through 'layer' from a call to 'xyplot': e.g. \code{xyplot( y ~ x, data, groups = g, fit = data$yhat, lower = with(data, yhat - 2*se), upper = with(data, yhat + 2*se), subscripts = T)}}
@@ -29,6 +31,8 @@ fillin(data, form, n = 200, xpd = 1)
 \item{lower,upper}{}
 
 \item{subscripts}{}
+
+\item{...}{NOTE: may specify anything you don't want passed through ...}
 
 \item{group.number}{}
 
@@ -44,7 +48,7 @@ fillin(data, form, n = 200, xpd = 1)
 
 \item{fontface}{}
 
-\item{labels}{to display}
+\item{labels}{default is rownames of data}
 
 \item{data}{data frame to be used to add additional values of numeric variable}
 
@@ -56,6 +60,8 @@ Values falling outside conditional minima and maxima are culled. Default 200.}
 \item{xpd}{expansion factor to add points beyond minima and maxima. Default 1.0.}
 
 \item{dots}{}
+
+\item{labels}{to display}
 
 \item{data}{data frame with values of x that need filling in}
 
@@ -73,11 +79,11 @@ The 'panel.bands', 'panel.fit', and 'panel.labels' functions are
 \description{
 Panel functions for predicted values and SE bands using 'layer' and 'glayer' in the package latticeExtra
 
-gpanel.labels: shows all labels, for selected labels see the examples with
-\code{\link{trellis.focus}} and \code{\link{panel.identify}}:
-     trellis.focus()
-     panel.identify(labels = rownames(data),rot=-15,col = col.symbol, etc.)
-     trellis.unfocus()
+This is an experiment in writing a function that can be
+called via layer or glayer without further complications
+e.g. \code{xyplot(......,labels = rownames(data)) + layer(gpanel.labels(...))}
+or  \code{xyplot(....., labels = rownames(data), subscripts = T) + glayer(gpanel.labels(...))}.
+For selected labels see the examples with \code{\link{trellis.focus}} and \code{\link{panel.identify}}
 }
 \details{
 With 'layer' and 'glayer' in 'latticeExtra', these functions can be used to easily generate fitted values and
@@ -95,8 +101,7 @@ confidence or prediction bands that have a reasonable appearance whether a plot 
 }}
 \examples{
 \dontrun{
-  library(spida)
-  library(spidanew)
+  library(yscs)
   library(latticeExtra)
   library(car)
 
@@ -150,11 +155,12 @@ confidence or prediction bands that have a reasonable appearance whether a plot 
                  lower = z$fit - z$se,
                  upper = z$fit + z$se,
                  auto.key = list(space='right', lines= T)))
-  p + layer( gpanel.fit(...))
+  p + layer( panel.fit(...))
 
   # gd_(basecol = 'tomato4')  # Use 'gd_' to set parameters without groups
   gd_(base = 'tomato4')  # Use 'gd_' to set parameters without groups
-  p + layer( gpanel.fit(...,  col = 'grey10'))
+  p + layer( panel.fit(...))
+  p + layer( panel.fit(...,  col = 'grey10'))
 
   ###
   ### With panels and groups
@@ -222,7 +228,12 @@ confidence or prediction bands that have a reasonable appearance whether a plot 
                  auto.key = list(space='right', lines= T, cex = 1.5)))
 
   p + layer( gpanel.fit(...))
-  p + layer( gpanel.fit(..., col = 'black', alpha = .1)) + layer(gpanel.text(...))
+  p + layer( gpanel.fit(..., col = 'black', alpha = .1)) + layer(gpanel.labels(...))
+}
+\dontrun{
+trellis.focus()
+panel.identify(labels = rownames(data),rot=-15,col = col.symbol, etc.)
+trellis.unfocus()
 }
 }
 \author{

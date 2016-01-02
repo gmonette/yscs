@@ -38,8 +38,7 @@
 #' @author Georges Monette <georges@@yorku.ca>
 #' @examples
 #' \dontrun{
-#'   library(spida)
-#'   library(spidanew)
+#'   library(yscs)
 #'   library(latticeExtra)
 #'   library(car)
 #'
@@ -93,11 +92,12 @@
 #'                  lower = z$fit - z$se,
 #'                  upper = z$fit + z$se,
 #'                  auto.key = list(space='right', lines= T)))
-#'   p + layer( gpanel.fit(...))
+#'   p + layer( panel.fit(...))
 #'
 #'   # gd_(basecol = 'tomato4')  # Use 'gd_' to set parameters without groups
 #'   gd_(base = 'tomato4')  # Use 'gd_' to set parameters without groups
-#'   p + layer( gpanel.fit(...,  col = 'grey10'))
+#'   p + layer( panel.fit(...))
+#'   p + layer( panel.fit(...,  col = 'grey10'))
 #'
 #'   ###
 #'   ### With panels and groups
@@ -165,7 +165,7 @@
 #'                  auto.key = list(space='right', lines= T, cex = 1.5)))
 #'
 #'   p + layer( gpanel.fit(...))
-#'   p + layer( gpanel.fit(..., col = 'black', alpha = .1)) + layer(gpanel.text(...))
+#'   p + layer( gpanel.fit(..., col = 'black', alpha = .1)) + layer(gpanel.labels(...))
 #' }
 #' @export
 gpanel.fit <-
@@ -207,24 +207,31 @@ panel.fit <- gpanel.fit
 #' @describeIn gpanel.fit identical to gpanel.fit but kept for backward compatibility
 #' @export
 gpanel.band <- gpanel.fit
-#' gpanel.labels: shows all labels, for selected labels see the examples with
-#' \code{\link{trellis.focus}} and \code{\link{panel.identify}}:
-#'      trellis.focus()
-#'      panel.identify(labels = rownames(data),rot=-15,col = col.symbol, etc.)
-#'      trellis.unfocus()
+#' gpanel.labels: shows all labels
+#'
+#' This is an experiment in writing a function that can be
+#' called via layer or glayer without further complications
+#' e.g. \code{xyplot(......,labels = rownames(data)) + layer(gpanel.labels(...))}
+#' or  \code{xyplot(....., labels = rownames(data), subscripts = T) + glayer(gpanel.labels(...))}.
+#' For selected labels see the examples with \code{\link{trellis.focus}} and \code{\link{panel.identify}}
+#' @param x,y position of labels, usually supplied through panel call
+#' @param labels default is rownames of data
+#' @param ... NOTE: may specify anything you don't want passed through ...
+#' @examples
+#' \dontrun{
+#' trellis.focus()
+#' panel.identify(labels = rownames(data),rot=-15,col = col.symbol, etc.)
+#' trellis.unfocus()
+#' }
 #' @param labels to display
 #' @describeIn gpanel.fit
+#'
+# NOTE: Also include names of anything you DON'T want passed.
+#
 #' @export
 gpanel.labels <-
   function (x, y, labels , subscripts, ...)
   {
-    # NOTE: Also include names of anything you DON'T want passed.
-    # this is an experiment in writing a function that can be
-    # called via layer or glayer without further complications
-    # e.g. xyplot(......,labels = rownames(data)) + layer( gpanel.labels(...))
-    # or  xyplot(....., labels = rownames(data), subscripts = T) +
-    # glayer(gpanel.labels(...))
-    # for selected lables, use
 
     if(!missing(subscripts)) {
       labels <- labels[subscripts]

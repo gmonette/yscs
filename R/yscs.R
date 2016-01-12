@@ -1,4 +1,4 @@
-#' yscs: New functions for the spida package
+#' yscs: Functions used in the Statistical Consulting Service at York University
 #'
 #' The yscs package is a collection of functions and datasets intended primarily
 #' for statistical consulting, with a particular emphasis on

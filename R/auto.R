@@ -10,3 +10,6 @@ auto <- function(x, force = FALSE) {
   if(is.null(names(x)) || force) names(x) <- x
   x
 }
+#' @rdname auto
+#' @export
+autonym <- auto

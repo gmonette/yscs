@@ -2,9 +2,12 @@
 % Please edit documentation in R/auto.R
 \name{auto}
 \alias{auto}
+\alias{autonym}
 \title{Creates an autonym}
 \usage{
 auto(x, force = FALSE)
+
+autonym(x, force = FALSE)
 }
 \arguments{
 \item{x}{object that can be used to name itself.}

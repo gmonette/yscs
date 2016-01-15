@@ -2,6 +2,7 @@
 % Please edit documentation in R/wald.R
 \name{getData}
 \alias{getData}
+\alias{getData.gls}
 \alias{getData.lm}
 \alias{getData.lme}
 \alias{getData.lmer}
@@ -12,6 +13,8 @@ getData(x, ...)
 \method{getData}{lmer}(x, ...)
 
 \method{getData}{lme}(x, ...)
+
+\method{getData}{gls}(x, ...)
 
 \method{getData}{lm}(x, ...)
 }
@@ -28,6 +31,8 @@ so we just add a method for 'lm' and other objects
 \item \code{lmer}: method for lmer objects
 
 \item \code{lme}: method for lme objects
+
+\item \code{gls}: method for gls objects
 
 \item \code{lm}: method for lm objects
 }}

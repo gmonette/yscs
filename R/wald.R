@@ -1022,6 +1022,9 @@ getData.lmer <- function(x,...) slot(x,'frame')
 #' @describeIn getData method for lme objects
 #' @export
 getData.lme <- function(x,...) nlme:::getData.lme(x,...)
+#' @describeIn getData method for gls objects
+#' @export
+getData.gls <- function(x,...) nlme:::getData.gls(x,...)
 #' @describeIn getData method for lm objects
 #' @export
 getData.lm <- function(x,...) model.frame(x,...)

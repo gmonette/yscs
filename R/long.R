@@ -44,6 +44,36 @@
 #' zz$id3 <- rownames(zz)
 #' long(zz, idvar = 'id3' ,timevar = 'Part')
 #'
+#' dd <- data.frame( y.a = 1:3, y.b = 1:3, x.a= 1:3, time = 1:3,
+#'     x.b = 11:13, x.c = 21:23, id = c('a','a','b'))
+#' tolong(dd, sep = '.')
+#' dl <- tolong(dd, sep = '.', timevar = "type", idvar = 'patient')
+#' towide(dl, idvar = 'patient', timevar = 'type')
+#'
+#' # Long file with additional constants
+#'
+#' dl <- data.frame(name = rep(c('A','B','C'), c(3,3,2)),
+#'                  site = c('head','neck','jaw','chest')[
+#'                    c(1,2,3,1,2,3,1,4)],
+#'                  sex = rep(c('male','female','male'), c(3,3,2)),
+#'                  var1 = 1:8,
+#'                  var2 = 11:18,
+#'                  invar = rep(1:3, c(3,3,2)))
+#' towide(dl, c('name'), 'site')
+# #
+# # Two indexing variable: e.g. hippocampal volume 2 sides x 3 sites
+# #
+# dl <- data.frame(name = rep(LETTERS[1:3], each = 6),
+#                  side = rep(c('left','right'), 9),
+#                  site = rep(rep(c('head','body','tail'),each = 2),3),
+#                  volume = 1:18,
+#                  sex = rep(c('female','male','female'), each = 6),
+#                  age = rep(c(25, 43, 69), each = 6))
+# dl
+# (dlsite <- towide(dl, c('name','side'), 'site'))
+# (dlsite.side <- towide(dlsite, c('name'), 'side'))
+#
+#'
 #' @export
 long <- function (data, sep = "_",  timevar = 'time',
                   idvar = 'id', ids = 1:nrow(data),

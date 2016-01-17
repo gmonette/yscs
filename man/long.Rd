@@ -68,5 +68,22 @@ names(z)
 zz$id3 <- rownames(zz)
 long(zz, idvar = 'id3' ,timevar = 'Part')
 
+dd <- data.frame( y.a = 1:3, y.b = 1:3, x.a= 1:3, time = 1:3,
+    x.b = 11:13, x.c = 21:23, id = c('a','a','b'))
+tolong(dd, sep = '.')
+dl <- tolong(dd, sep = '.', timevar = "type", idvar = 'patient')
+towide(dl, idvar = 'patient', timevar = 'type')
+
+# Long file with additional constants
+
+dl <- data.frame(name = rep(c('A','B','C'), c(3,3,2)),
+                 site = c('head','neck','jaw','chest')[
+                   c(1,2,3,1,2,3,1,4)],
+                 sex = rep(c('male','female','male'), c(3,3,2)),
+                 var1 = 1:8,
+                 var2 = 11:18,
+                 invar = rep(1:3, c(3,3,2)))
+towide(dl, c('name'), 'site')
+
 }
 

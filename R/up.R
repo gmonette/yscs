@@ -1,11 +1,6 @@
 ##
 ##  up + constant: to check whether something is constant
 ##
-
-
-
-
-
 #' Generic test for constant
 #'
 #' @param x
@@ -252,4 +247,21 @@ up <- function ( object, form = formula(object),
     }
   }
   value
+}
+#' na.include action
+#'
+#' From the Hmisc package, author: Frank Harrell
+#'
+#' @param obj a data.frame whose factors will be redefined so exclude = NULL
+#' @export
+na.include <-
+function (obj)
+{
+  if (inherits(obj, "data.frame"))
+    for (i in seq(along = obj)) obj[[i]] <- na.include(obj[[i]])
+    else {
+      if (length(levels(obj)) && any(is.na(obj)))
+        obj <- factor(obj, exclude = NULL)
+    }
+    obj
 }

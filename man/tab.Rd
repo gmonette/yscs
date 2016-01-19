@@ -46,8 +46,11 @@ be frequencies, relative frequencies, percentages or sums of weights.
 Generates a table of frequencies or relative frequencies or relative
 percentages
 }
-\examples{
-
+\author{
+Georges Monette
+}
+\seealso{
+\code{\link{tab}}
 titanic <- as.data.frame(Titanic)
 head(titanic)
 tab(titanic, Freq ~ Sex + Age)
@@ -62,9 +65,5 @@ round(Tab(titanic, Freq ~ Sex + Survived + Age,
 
 round(Tab(titanic, Freq ~ Sex + Survived + Age,
     pct = c(1,3), keep = ""),2)
-
-}
-\author{
-Georges Monette
 }
 

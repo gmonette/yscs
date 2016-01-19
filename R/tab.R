@@ -55,16 +55,23 @@ dropLast <- function( mat ,drop = FALSE, keep = NULL) {
   # print(call)
   do.call( `[`,call)
 }
-
+#' tab without marginal totals
+#'
+#' Version of \code{\link{tab}}, with the option to drop selected margins without
+#' necessarily dropping
+#' the marginal average proportions denoted by "All".
+#' @seealso \code{\link{tab}}
+#' @param keep (default "All") names of margins to keep, to drop all margins, use keep = NULL
+#' @inheritParams tab
 #' @export
-Tab <- function(...,keep = "All") {
+Tab <- function(..., keep = "All") {
   # New version of Tab that handles pct and pr
   # To keep the "All" and not the "Total" rows,
   # specify keep = "All"
   # BUGS: would be more efficient if it
   #       called tab(...,total.margins=FALSE)
   #       when pct or pr arguments are not given
-  dropLast(tab(...), keep = keep)
+  as.table(dropLast(tab(...), keep = keep))
 }
 
 #' @export
@@ -98,7 +105,7 @@ pab <- Tab     # legacy
 #' be frequencies, relative frequencies, percentages or sums of weights.
 #' @author Georges Monette
 #' @examples
-#'
+#' @seealso \code{\link{tab}}
 #' titanic <- as.data.frame(Titanic)
 #' head(titanic)
 #' tab(titanic, Freq ~ Sex + Age)

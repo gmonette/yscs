@@ -54,13 +54,12 @@ A data frame with estimated coefficient, standard error, and, optionally, upper 
 A version of the wald function that produces a data frame directly, analogously to \code{as.data.frame(wald(...))}
 }
 \examples{
-data(hs)
-library( nlme )
-
+\dontrun{
 ###
 ### Using walddf to create and plot a data frame with predicted values
 ###
-\dontrun{
+  data(hs)
+  library( nlme )
   fit <- lme(mathach ~ (ses+I(ses^2)) * Sex * Sector, hs, random = ~ 1|school)
   summary(fit)
   pred <- expand.grid( ses = seq(-2,2,.1), Sex = levels(hs$Sex), Sector = levels(hs$Sector))

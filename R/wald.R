@@ -645,13 +645,12 @@ as.data.frame.wald <- function(obj, se = 2, digits = 3, sep = "", which = 1) {
 #'         the variables included the 'data' element of 'obj' if present.
 #'         If \code{length(which) > 1}, the returned object is a list of data frames.
 #' @examples
-#' data(hs)
-#' library( nlme )
-#'
+#' \dontrun{
 #' ###
 #' ### Using walddf to create and plot a data frame with predicted values
 #' ###
-#' \dontrun{
+#'   data(hs)
+#'   library( nlme )
 #'   fit <- lme(mathach ~ (ses+I(ses^2)) * Sex * Sector, hs, random = ~ 1|school)
 #'   summary(fit)
 #'   pred <- expand.grid( ses = seq(-2,2,.1), Sex = levels(hs$Sex), Sector = levels(hs$Sector))
@@ -757,7 +756,7 @@ walddf <- function(fit, Llist = "", clevel = 0.95,
               full = FALSE, fixed = FALSE,
               invert = FALSE, method = 'svd',
               df = NULL)
-  ret <- spidanew:::as.data.frame.wald(obj,
+  ret <- yscs:::as.data.frame.wald(obj,
               se = se, digits = digits,
               sep = sep)
   ret

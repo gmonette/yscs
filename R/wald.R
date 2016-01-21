@@ -120,7 +120,6 @@
 #' @examples
 #' data(hs)
 #' library( nlme )
-#'
 #' ###
 #' ### Using wald to create and plot a data frame with predicted values
 #' ###
@@ -184,25 +183,18 @@ wald <- function(fit, Llist = "", clevel = 0.95,
     ret <- paste(x, ret, sep="")
     ret
   }
-#      if(debug) disp( Llist)
   if(is.character(Llist) ) Llist <- structure(list(Llist), names=Llist)
   if(!is.list(Llist)) Llist <- list(Llist)
 
   ret <- list()
   fix <- getFix(fit)
-#      if(debug) disp(fix)
   beta <- fix$fixed
   vc <- fix$vcov
 
   dfs <- if(is.null(df) ) fix$df else df + 0*fix$df
-#      if(debug) disp(Llist)
   for (ii in 1:length(Llist)) {
     ret[[ii]] <- list()
     Larg <- Llist[[ii]]
-#          if(debug) {
-#               disp(ii)
-#               disp(Larg)
-#          }
     # Create hypothesis matrix: L
     L <- NULL
     if(is.character(Larg)) {
@@ -235,7 +227,7 @@ wald <- function(fit, Llist = "", clevel = 0.95,
     attr(L,'data') <- Ldata
     beta <- beta[ !is.na(beta) ]
 
-         ## Anova
+   ## Anova
     if( method == 'qr' ) {
       qqr <- qr(t(na.omit(L)))
       # Qqr <- Q(t(L))
@@ -1185,7 +1177,7 @@ Lform <- function( fit, form, data = getData(fit)) {
 Lmat <- function(fit, pattern, fixed = FALSE, invert = FALSE, debug = FALSE) {
      # pattern can be a character used as a regular expression in grep
      # or a list with each component generating  a row of the matrix
-     umatch <- function( pat, x ) {
+     umatch <- function( pat, x, fixed , invert ) {
             ret <- rep(0,length(pat))
             for ( ii in 1:length(pat)) {
                 imatch <- grep(pat[ii], x, fixed= fixed, invert = invert)
@@ -1208,7 +1200,7 @@ Lmat <- function(fit, pattern, fixed = FALSE, invert = FALSE, debug = FALSE) {
      fe <- getFix(fit)$fixed
      ne <- names(fe)
      if (is.character(pattern)) {
-        L.indices <- grep(pattern,names(fe))
+        L.indices <- grep(pattern,names(fe), fixed = fixed, invert = invert)
         ret <- diag( length(fe)) [L.indices,,drop = FALSE]
         if (debug) disp(ret)
         rownames(ret) <- names(fe) [L.indices]
@@ -1218,7 +1210,7 @@ Lmat <- function(fit, pattern, fixed = FALSE, invert = FALSE, debug = FALSE) {
         colnames(ret) <- ne
         for ( ii in 1:length(pattern)) {
             Lcoefs <- pattern[[ii]]
-            pos <- umatch(names(Lcoefs), ne)
+            pos <- umatch(names(Lcoefs), ne, fixed = fixed, invert = invert)
             if ( any( is.na(pos))) stop("Names of L coefs not matched in fixed effects")
             ret[ii, pos] <- Lcoefs
         }

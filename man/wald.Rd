@@ -115,7 +115,6 @@ ret$fixed <- fit$qbar ret$vcov <- fit$t ret$df <- fit$df ret }
 \examples{
 data(hs)
 library( nlme )
-
 ###
 ### Using wald to create and plot a data frame with predicted values
 ###

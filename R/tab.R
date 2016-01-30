@@ -21,8 +21,6 @@
 # TODO: update tab.Rd to explain new features in Tab
 # and keep = "All"
 
-
-
 #' @export
 .mat2arr <- function(x) {
       ret <- as.list(x)
@@ -37,7 +35,6 @@
       ret
 }
 #mat2arr( zza)
-
 
 #' @export
 dropLast <- function( mat ,drop = FALSE, keep = NULL) {
@@ -55,27 +52,55 @@ dropLast <- function( mat ,drop = FALSE, keep = NULL) {
   # print(call)
   do.call( `[`,call)
 }
+#' Drop last elements of an array if it is a "Total"
+#'
+#' Used to drop "Total" rows and columns after using \code{\link{tab}}.
+#'
+#' @param mat a matrix, array or table
+#' @param names_to_drop (default "Total")
+#' @drop (default FALSE) should one-element dimension be dropped as dimensions
+#' @seealso tab, Tab, dropLast
+#' @export
+dropLastTotal <- function (mat, names_to_drop = "Total", drop = FALSE) {
+  cl <- class(mat)
+  last <- function(x) x[length(x)]
+  cutlast <- function(x) x[-length(x)]
+  ind.last <- dim(mat)
+  ns <- dimnames(mat)
+  keep <- lapply(ind.last, seq_len)
+  # disp(keep)
+  for(i in seq_along(keep)) {
+    if( last(ns[[i]]) %in% names_to_drop) keep[[i]] <- cutlast(keep[[i]])
+  }
+  # disp(keep)
+  call <- c(list(mat), keep, drop = drop)
+  ret <- do.call(`[`, call)
+  class(ret) <- cl
+  ret
+}
 #' tab without marginal totals
 #'
 #' Version of \code{\link{tab}}, with the option to drop selected margins without
 #' necessarily dropping
 #' the marginal average proportions denoted by "All".
 #' @seealso \code{\link{tab}}
-#' @param keep (default "All") names of margins to keep, to drop all margins, use keep = NULL
+#' @param names_to_drop (default "Total") names of margins to drop
 #' @inheritParams tab
 #' @export
-Tab <- function(..., keep = "All") {
+Tab <- function(..., names_to_drop = "Total") {
   # New version of Tab that handles pct and pr
   # To keep the "All" and not the "Total" rows,
   # specify keep = "All"
   # BUGS: would be more efficient if it
   #       called tab(...,total.margins=FALSE)
   #       when pct or pr arguments are not given
-  as.table(dropLast(tab(...), keep = keep))
+  as.table(dropLastTotal(tab(..., total.margins = FALSE), names_to_drop = names_to_drop))
 }
 
 #' @export
 pab <- Tab     # legacy
+#' @export
+tab_ <- Tab    # future?
 
 #' Table of frequencies or relative frequencies bordered with totals and
 #' including NAs

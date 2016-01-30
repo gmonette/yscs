@@ -1,3 +1,4 @@
+* added dropLastTotal and modified tab and Tab to change behavior with Total and All margins
 * added grepv
 * added sortdf, assn -- mainly for magrittr pipeline
 
@@ -5,8 +6,3 @@
 
 * ported functions accumulated in 'spidanew'
 
-| Table    |   Col 2   |
-|-----------|----------:|
-| where will this go | and this???|
-|-----------|:----------|
-|and what about this | 123.11|

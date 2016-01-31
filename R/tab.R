@@ -54,7 +54,8 @@ dropLast <- function( mat ,drop = FALSE, keep = NULL) {
 }
 #' Drop last elements of an array if it is a "Total"
 #'
-#' Used to drop "Total" rows and columns after using \code{\link{tab}}.
+#' Used to drop "Total" rows and columns after using \code{\link{tab}}. Synonyms for
+#' legacy: \code{Tab} and \{pab}.
 #'
 #' @param mat a matrix, array or table
 #' @param names_to_drop (default "Total")
@@ -78,29 +79,6 @@ dropLastTotal <- function (mat, names_to_drop = "Total", drop = FALSE) {
   class(ret) <- cl
   ret
 }
-#' tab without marginal totals
-#'
-#' Version of \code{\link{tab}}, with the option to drop selected margins without
-#' necessarily dropping
-#' the marginal average proportions denoted by "All".
-#' @seealso \code{\link{tab}}
-#' @param names_to_drop (default "Total") names of margins to drop
-#' @inheritParams tab
-#' @export
-Tab <- function(..., names_to_drop = "Total") {
-  # New version of Tab that handles pct and pr
-  # To keep the "All" and not the "Total" rows,
-  # specify keep = "All"
-  # BUGS: would be more efficient if it
-  #       called tab(...,total.margins=FALSE)
-  #       when pct or pr arguments are not given
-  as.table(dropLastTotal(tab(..., total.margins = FALSE), names_to_drop = names_to_drop))
-}
-
-#' @export
-pab <- Tab     # legacy
-#' @export
-tab_ <- Tab    # future?
 
 #' Table of frequencies or relative frequencies bordered with totals and
 #' including NAs
@@ -108,18 +86,14 @@ tab_ <- Tab    # future?
 #' Generates a table of frequencies or relative frequencies or relative
 #' percentages
 #'
-#' @aliases tab tab.formula tab.data.frame tab.default Tab
-#' @param \dots as with \code{table}, one or more objects which can be
-#' interpreted as factors (including character strings), or a list (or data
-#' frame) whose components can be so interpreted.
+#' @param \dots as with \code{table}, one or more objects which can be interpreted as factors (including character strings), or a list (or data frame) whose components can be so interpreted.
 #' @param data a data frame in which formula are interpreted
-#' @param fmla a formula whose right-hand side names the variables to be used
-#' for tabulation. The optional left-hand side specifies a variable to be used
-#' for weights.
+#' @param fmla a formula whose right-hand side names the variables to be used for tabulation. The optional left-hand side specifies a variable to be used for weights.
 #' @param useNA whether to include NA levels. The default is "ifany". Can also
 #' be set to "no" or "always".
-#' @param pct margins to be scaled to sum to 100
-#' @param pr margins to be scaled to sum to 1
+#' @param pct margins to be scaled to sum to 100. This is the vector of margin indices on which percentages are conditioned. For example, with the call \code{tab(~ A + B + C, data, pct = 2:3)}, the table will contain conditional percentages for variable
+#' \code{A} conditional of combinations of \code{B} and \code{C}.
+#' @param pr margins to be scaled to sum to 1. This is the vector of margin indices on which percentages are conditioned.
 #' @param total.margins if FALSE, generate table without margins
 #' @param weights (not working temporarily) instead of generating a frequency table, generate a table
 #' with the sum of the weights
@@ -128,9 +102,10 @@ tab_ <- Tab    # future?
 #' @return An object of class 'table' of dimension equal to the number of
 #' variables, with optional margins showing totals. Elements of the matrix can
 #' be frequencies, relative frequencies, percentages or sums of weights.
+#' @aliases tab tab.formula tab.data.frame tab.default Tab
+#' @seealso \code{\link{tab_}} (synonym: Tab) to drop "Total" margins.
 #' @author Georges Monette
 #' @examples
-#' @seealso \code{\link{tab}}
 #' titanic <- as.data.frame(Titanic)
 #' head(titanic)
 #' tab(titanic, Freq ~ Sex + Age)
@@ -154,7 +129,7 @@ tab.table <- function(x,...) {
     data <- as.data.frame(x)
     wt <- data$Freq
     data$Freq <- NULL
-    tab(data, ..., weights = wt)
+    tab.data.frame(data, ..., weights = wt)
 }
 #' @describeIn tab
 #' @export
@@ -188,7 +163,7 @@ tab.data.frame <- function (dd, fmla,
     xx <- model.frame(fmla[-2], dd, na.action = NULL)
   } else {
     xx = model.frame(fmla, dd, na.action = NULL)
-    weights <- eval(substitute(weights), dd, environment(fmla))
+    #weights <- eval(substitute(weights), dd, environment(fmla))  # so weights is evaluated in parent.frame
   }
   if(!is.null(weights) && any(is.na(weights))) {
     warning("NAs in weights set to -Inf")
@@ -211,7 +186,6 @@ tab.default <- function (..., total.margins = TRUE,
                          na.rm = NULL,
                          all.label = "All")
 {
-
   if(!is.null(na.rm)) useNA <- if(na.rm) "no" else "ifany"
   aa <- list(...)
   if (length(aa) == 1 && is.list(aa[[1]])) {
@@ -250,7 +224,7 @@ tab.default <- function (..., total.margins = TRUE,
   else if (total.margins) ret = atotal(ret)
   if( test ) attr(ret,'test') <- test.out
   if( test ) ret <- unclass(ret)   # so attributes will print
-  ret
+  as.table(ret)
 }
 #' Transform a frequency table into relative frequencies relative to a margin.
 #'
@@ -449,5 +423,30 @@ abind <- function(arr1,arr2,d,facename="") {
 }
 
 
+#' tab without marginal totals
+#'
+#' Version of \code{\link{tab}}, with the option to drop selected margins without
+#' necessarily dropping
+#' the marginal average proportions denoted by "All".
+#'
+#' @param \dots arguments to the \code{\link{tab}} function.
+#' @param names_to_drop (default "Total") names of margins to drop
+#' @aliases Tab pab
+#' @seealso \code{\link{tab}}
+#' @export
+tab_ <- function(..., names_to_drop = "Total") {
+  # New version of Tab that handles pct and pr
+  # To keep the "All" and not the "Total" rows,
+  # specify keep = "All"
+  # BUGS: would be more efficient if it
+  #       called tab(...,total.margins=FALSE)
+  #       when pct or pr arguments are not given
+  as.table(dropLastTotal(tab(..., total.margins = FALSE), names_to_drop = names_to_drop))
+}
+
+#' @export
+pab <- tab_     # legacy
+#' @export
+Tab <- tab_    # future?
 
 

@@ -12,22 +12,19 @@ including NAs}
 tab(x, ...)
 }
 \arguments{
-\item{\dots}{as with \code{table}, one or more objects which can be
-interpreted as factors (including character strings), or a list (or data
-frame) whose components can be so interpreted.}
+\item{\dots}{as with \code{table}, one or more objects which can be interpreted as factors (including character strings), or a list (or data frame) whose components can be so interpreted.}
 
 \item{data}{a data frame in which formula are interpreted}
 
-\item{fmla}{a formula whose right-hand side names the variables to be used
-for tabulation. The optional left-hand side specifies a variable to be used
-for weights.}
+\item{fmla}{a formula whose right-hand side names the variables to be used for tabulation. The optional left-hand side specifies a variable to be used for weights.}
 
 \item{useNA}{whether to include NA levels. The default is "ifany". Can also
 be set to "no" or "always".}
 
-\item{pct}{margins to be scaled to sum to 100}
+\item{pct}{margins to be scaled to sum to 100. This is the vector of margin indices on which percentages are conditioned. For example, with the call \code{tab(~ A + B + C, data, pct = 2:3)}, the table will contain conditional percentages for variable
+\code{A} conditional of combinations of \code{B} and \code{C}.}
 
-\item{pr}{margins to be scaled to sum to 1}
+\item{pr}{margins to be scaled to sum to 1. This is the vector of margin indices on which percentages are conditioned.}
 
 \item{total.margins}{if FALSE, generate table without margins}
 
@@ -46,11 +43,7 @@ be frequencies, relative frequencies, percentages or sums of weights.
 Generates a table of frequencies or relative frequencies or relative
 percentages
 }
-\author{
-Georges Monette
-}
-\seealso{
-\code{\link{tab}}
+\examples{
 titanic <- as.data.frame(Titanic)
 head(titanic)
 tab(titanic, Freq ~ Sex + Age)
@@ -65,5 +58,12 @@ round(Tab(titanic, Freq ~ Sex + Survived + Age,
 
 round(Tab(titanic, Freq ~ Sex + Survived + Age,
     pct = c(1,3), keep = ""),2)
+
+}
+\author{
+Georges Monette
+}
+\seealso{
+\code{\link{tab_}} (synonym: Tab) to drop "Total" margins.
 }
 

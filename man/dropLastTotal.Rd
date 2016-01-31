@@ -11,9 +11,6 @@ dropLastTotal(mat, names_to_drop = "Total", drop = FALSE)
 
 \item{names_to_drop}{(default "Total")}
 }
-\description{
-Used to drop "Total" rows and columns after using \code{\link{tab}}.
-}
 \seealso{
 tab, Tab, dropLast
 }

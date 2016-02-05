@@ -85,7 +85,7 @@
 #' @param fit a model for which a \code{getFix} method exists.
 #' @param Llist a hypothesis matrix or a pattern to be matched or a list of
 #'        these
-#' @param clevel level for confidence intervals
+#' @param clevel level for confidence intervals. No confidence intervals if clevel is NULL
 #' @param data data frame used as 'data' attribute fot list elements returned only if
 #'        the corresonding element of \code{Llist} has a NULL data attribute
 #' @param debug (default FALSE) produce verbose information
@@ -119,7 +119,7 @@
 #' @references REFERENCES HERE
 #' @examples
 #' data(hs)
-#' library( nlme )
+#' library(nlme)
 #' ###
 #' ### Using wald to create and plot a data frame with predicted values
 #' ###

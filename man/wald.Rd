@@ -25,7 +25,7 @@ glh(...)
 \item{Llist}{a hypothesis matrix or a pattern to be matched or a list of
 these}
 
-\item{clevel}{level for confidence intervals}
+\item{clevel}{level for confidence intervals. No confidence intervals if clevel is NULL}
 
 \item{data}{data frame used as 'data' attribute fot list elements returned only if
 the corresonding element of \code{Llist} has a NULL data attribute}
@@ -114,7 +114,7 @@ ret$fixed <- fit$qbar ret$vcov <- fit$t ret$df <- fit$df ret }
 }}
 \examples{
 data(hs)
-library( nlme )
+library(nlme)
 ###
 ### Using wald to create and plot a data frame with predicted values
 ###

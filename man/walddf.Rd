@@ -14,7 +14,7 @@ walddf(fit, Llist = "", clevel = 0.95, data = NULL, debug = FALSE,
 \item{Llist}{a hypothesis matrix or a pattern to be matched or a list of
 these}
 
-\item{clevel}{level for confidence intervals}
+\item{clevel}{level for confidence intervals. No confidence intervals if clevel is NULL}
 
 \item{data}{data frame used as 'data' attribute fot list elements returned only if
 the corresonding element of \code{Llist} has a NULL data attribute}

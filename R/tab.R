@@ -1,6 +1,9 @@
 ###
 ###
 ### From spida-test
+### Modified by GM 2016-03-07
+### - added ability to drop 'All' easily for
+###   barcharts
 ### Modified by GM 2013-08-20
 ### 1. Added ability to use pr and pct in Tab
 ###    dropping total margins but keeping by default "All"
@@ -142,14 +145,15 @@ tab.array <- function(x,...) tab(as.table(x),...)
 tab.formula <- function( fmla, data = sys.frame(sys.parent()), ... ) tab.data.frame(data,fmla,...)
 #' @describeIn tab
 #' @export
-tab.data.frame <- function (dd, fmla,
-                            total.margins = TRUE,
-                            useNA = "ifany",
-                            pct = NULL, pr = NULL,
-                            test = FALSE,
-                            weights = NULL,
-                            na.rm = NULL,
-                            all.label = "All")
+tab.data.frame <-
+  function (dd, fmla,
+        total.margins = TRUE,
+        useNA = "ifany",
+        pct = NULL, pr = NULL,
+        test = FALSE,
+        weights = NULL,
+        na.rm = NULL,
+        all.label = "All")
 {
   # GM: 2014 08 22: modified handling of lhs to fix bug when variable in lhs
   #                 also appears in rhs
@@ -441,7 +445,9 @@ tab_ <- function(..., names_to_drop = "Total") {
   # BUGS: would be more efficient if it
   #       called tab(...,total.margins=FALSE)
   #       when pct or pr arguments are not given
-  as.table(dropLastTotal(tab(..., total.margins = FALSE), names_to_drop = names_to_drop))
+  as.table(dropLastTotal(
+    tab(..., total.margins = FALSE),
+        names_to_drop = names_to_drop))
 }
 
 #' @export
